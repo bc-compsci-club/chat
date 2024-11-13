@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import bcPic from "../../../images/brooklyn-college/bc-library-16to9.jpg"
+import Link from 'next/link';
 export default function HeroSection() {
   return (
     <div className="relative isolate overflow-hidden bg-gradient-to-b from-bc-red/15">
@@ -13,14 +14,20 @@ export default function HeroSection() {
             By the BC tech community, for the BC tech community. The Brooklyn College Computer Science Club AI Chat platform that enable students to search for opportunity, classes, and events with support of generative AI
             </p>
             <div className="mt-10 flex items-center gap-x-6">
-              <a
+              <Link
                 href="https://bccs.club"
-                target="_blank"
-                rel="noopener noreferrer"
+  
                 className="rounded-md px-3.5 py-2.5 text-sm font-semibold bg-transparent text-bc-red border border-bc-red hover:bg-bc-yellow hover:border-transparent"
               >
                 Back to main site
-              </a>
+              </Link>
+              <Link
+                href="/chat"
+                rel="noopener noreferrer"
+                className="rounded-md px-3.5 py-2.5 text-sm font-semibold bg-transparent text-bc-red border border-bc-red hover:bg-bc-yellow hover:border-transparent"
+              >
+                Chat with AI
+              </Link>
             </div>
           </div>
           <Image
