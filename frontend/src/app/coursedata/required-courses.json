@@ -1,0 +1,82 @@
+{
+    "requiredCourses": [
+      {
+        "course_code": "CISC 1115",
+        "course_name": "Introduction to Programming Using Java",
+        "description": "Algorithms, computers and programs. Writing, debugging, and testing programs. Loops and conditional control structures. Method definition and parameter passing. Arrays, ArrayLists, and Strings. Sorting, searching and other basic algorithms. Input and output. Programming applications selected from various disciplines. History and basic concepts of computer science.",
+        "prerequisites": ["None"],
+        "credits": 4
+      },
+      {
+        "course_code": "CISC 3115",
+        "course_name": "Introduction to Modern Programming Techniques",
+        "description": "A second course in programming. Programming techniques emphasizing reliability, maintainability, and reusability. Multi-file programs. Abstract data types. Objects, classes, and object-oriented design. Test suites, test drivers, and testing strategies; debugging, assertions, and an introduction to formal techniques. Recursion, event-driven programming and threads, GUI programming, and simple network programming.",
+        "prerequisites": ["CISC 1115 or 1170"],
+        "credits": 4
+      },
+      {
+        "course_code": "CISC 2210",
+        "course_name": "Introduction to Discrete Structures (Discrete Mathematics)",
+        "description": "Elementary set theory, functions, relations, and Boolean algebra. Switching circuits, gating networks. Definition and analysis of algorithms. Applications of graph theory to computer science. Related algorithms. Introduction to combinatorial computing and counting arguments. Introduction to error analysis.",
+        "prerequisites": ["CISC 1115 or 1170 or 1215; and MATH 1101 or 1012"],
+        "credits": 3
+      },
+      {
+        "course_code": "CISC 3130",
+        "course_name": "Data Structures",
+        "description": "Container classes: their design, implementations, and applications. Sequences: vectors, linked lists, stacks, queues, deques, lists. Associative structures: sets, maps and their hash and tree underlying representations. Sorting and searching techniques. Collection frameworks and hierarchies.",
+        "prerequisites": ["CISC 3115; and either 1115 or 1170"],
+        "credits": 4
+      },
+      {
+        "course_code": "CISC 3310",
+        "course_name": "Principles of Computer Architecture",
+        "description": "Introduction to digital logic. Basic digital circuits. Boolean algebra and combinational logic, data representation and transfer, digital arithmetic. Instruction sets. Introduction to assembly languages: ALU and memory reference instructions, flow control, subroutine linkage, arrays and structures. Memory. I/O systems. Performance. Relationship between software and architecture.",
+        "prerequisites": ["CISC 1115 or 1170; and CISC 2210"],
+        "credits": 4
+      },
+      {
+        "course_code": "CISC 2820W",
+        "course_name": "Computers and Ethics",
+        "description": "Analysis of ethical issues pertaining to computers and the workplace, anonymity and privacy, copyright and patent law (as applied to software), computer crime, security, unauthorized use, codes of conduct for computer professionals, access and availability of computing technologies. Application of theoretical frameworks such as virtue ethics, deontological theories and utilitarianism to the ethical problems encountered in computing technologies. Writing intensive course. (This course is the same as Philosophy 3318W.)",
+        "prerequisites": ["CISC 1115 or 1170; and English 1012"],
+        "credits": 3
+      },
+      {
+        "course_code": "CISC 3142",
+        "course_name": "Programming Paradigms in C++",
+        "description": "An introduction to C++ and its roles providing support for object-oriented programming, generic programming, procedural programming, and low-level programming. The C++ memory model, and topics in explicit memory management. Storage classes, scope, and compilation stages. The Standard Template Library. Comparison with Java.",
+        "prerequisites": ["CISC 1115 or 1170; and both CISC 3115 and 3130"],
+        "credits": 3
+      },
+      {
+        "course_code": "CISC 3320",
+        "course_name": "Operating Systems",
+        "description": "Design and implementation of operating systems for large computers. Multiprogramming, multiprocessing, time sharing. Resource allocation and scheduling. Communications, conversational computing, computer networks. Memory protection, interrupts, segmentation, paging, and virtual memories.",
+        "prerequisites": ["CISC 3130, and CISC 3310"],
+        "credits": 3
+      },
+      {
+        "course_code": "CISC 3220",
+        "course_name": "Analysis of Algorithms",
+        "description": "Algorithms, data structures, and their analysis. Applications for and solution to recurrence problems. Upper and lower bounds on complexities of various problems. Classification by design structures. Sorting methods, graph and selection algorithms. Pattern matching. Efficient computation of transitive closure and equivalences. NP-completeness.",
+        "prerequisites": ["CISC 2210 and CISC 3130 and MATH 1201"],
+        "credits": 3
+      },
+      {
+        "course_code": "CISC 3140",
+        "course_name": "Design and Implementation of Large-Scale Web Applications",
+        "description": "Overview of design and implementation of large-scale application concerns. Team-based software development methodologies, tools, and high-impact practice. Separation of structure, style, and behavior. Interpreted and/or declarative languages, dynamic types, functional programming, prototypal classes, and closures. Networked machine communication. Simple database operations.",
+        "prerequisites": ["CISC 3115 and 3130"],
+        "credits": 3
+      },
+      {
+        "course_code": "CISC 4900",
+        "course_name": "Independent and Group Projects I",
+        "description": "Planning and development of a real computer systems project supervised by a faculty member. Projects may involve group participation. Achievement measured by demonstrable attainment of the project's goals. Written report.",
+        "prerequisites": ["CISC 3130 and a CISC course numbered above 3130; and permission of the chairperson."],
+        "credits": 3
+      }
+    ]
+  }
+  
