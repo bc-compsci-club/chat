@@ -26,8 +26,9 @@ export default function Chat() {
     setMessages((messages) => [
       ...messages,
       { role: "user", content: message },
-      { role: "assistant", content: "Searching..." },
+      { role: "assistant", content: "Thinking..." },
     ]);
+    console.time("fetch");
     const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/llm` as string, {
       method: "POST",
       headers: {
@@ -51,12 +52,13 @@ export default function Chat() {
           ...otherMessages,
           {
             ...lastMessage,
-            content: lastMessage.content === "Searching..." ? "" : lastMessage.content + text,
+            content: lastMessage.content === "Thinking..." ? text : lastMessage.content + text,
           },
         ];
       });
       if (done) break;
     }
+    console.timeEnd("fetch");
   }
   return (
     <div className="relative isolate px-5 lg:px-24 py-2 h-screen overflow-hidden bg-gradient-to-b from-bc-red/15">
