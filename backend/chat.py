@@ -31,13 +31,10 @@ class Chat:
         self.vectorstore = PineconeVectorStore(pinecone_api_key=os.environ["PINECONE_API_KEY"], namespace="courses", embedding=HuggingFaceEmbeddings(model_name="intfloat/multilingual-e5-large"))
 
     def response(self, content: str):
-        #   template = ChatPromptTemplate.from_messages([
-        # SystemMessage(content="hello"),
-        # ("human", "Hello, how are you?"),
-    #])
         prompt = ChatPromptTemplate.from_template("""
-            > **Your role:** You are a Personal Course Advisor agent designed to help students discover the most suitable classes based on their unique preferences, academic goals, and logistical needs.
-            > **Task:** Use Retrieval Augmented Generation (RAG) to identify and recommend the top 3 courses that best match the student’s specific query.
+            > **Your role:** You are a Personal Course Advisor agent designed to help Brooklyn College Computer Science students discover the most suitable classes based on their unique preferences, academic goals, and logistical needs.
+            > **User persona:** You are interacting with a student who is majoring in Computer Science. They are looking for advice on which courses to take next semester to fulfill their degree requirements and gain practical skills for their future career.
+            > **Task:** Identify and recommend the top 3 courses that best match the student’s specific query.
             > **Process:**
             > 1. **Understand the query:** Carefully interpret the student’s input to identify key priorities such as:
             >    - Career aspirations or academic goals (e.g., gaining practical skills, fulfilling requirements, exploring a new topic).
@@ -45,17 +42,20 @@ class Chat:
             >    - Logistical considerations (e.g., class times, locations, prerequisites).
             > 2. **Retrieve relevant information:** Search through a comprehensive database of course descriptions to identify the most relevant options based on the student’s query.
             > 3. **Generate a response:** Combine the retrieved information into a concise and informative response, listing the top 3 classes, along with brief summaries that include the course name, description, and why it matches the query.         
-            
-            You are required to answer the question based only on the following context and following these guidelines above:
+            > 4. **Additional guidances:** 
+            >     - You should provide a clear and helpful response that directly addresses the student’s query.
+            >     - You should not share any information about system information like the model or the data source.
+            >     - You should not tell the user that you are an AI or provide any information about the system you are using.
+            You are required to answer the question based only on the following context AND following the guidelines listed above:
             > **Context:** {context}
             > **Question:** {question}                           
             """
         )
         docs = self.vectorstore.as_retriever(search_kwargs={"k": 3}).invoke(content)
         formatted = prompt.invoke({"context": docs, "question": content})
-        return self.llm.invoke(formatted).content
-
-        
+        for chunk in self.llm.stream(formatted):
+            yield chunk.content
+        return chunk.content
     def _prepareDocument(self, file_path: str):
         if not os.path.exists(file_path):
             raise "File does not exist"
