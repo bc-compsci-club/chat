@@ -51,7 +51,7 @@ export default function Chat() {
           ...otherMessages,
           {
             ...lastMessage,
-            content: lastMessage.content === "Searching..." ? "" : lastMessage.content + text,
+            content: lastMessage.content === "Searching..." ? text : lastMessage.content + text,
           },
         ];
       });
