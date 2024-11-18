@@ -11,9 +11,14 @@ export type MessageData = {
 
 export default function Chat() {
   const [message, setMessage] = React.useState("");
-  const [messages, setMessages] = React.useState<MessageData[]>([
-    { role: "assistant", content: "Hello, how can I help you?" },
-  ]);
+  const messageRef = React.useRef<HTMLDivElement>(null);
+  const [messages, setMessages] = React.useState<MessageData[]>([]);
+
+  React.useEffect(() => {
+    if (messageRef.current) {
+      messageRef.current.scrollTop = messageRef.current.scrollHeight;
+    }
+  }, [messages]);
 
   async function handleForm(e: React.FormEvent) {
     e.preventDefault()
@@ -21,7 +26,7 @@ export default function Chat() {
     setMessages((messages) => [
       ...messages,
       { role: "user", content: message },
-      { role: "assistant", content: "" },
+      { role: "assistant", content: "Searching..." },
     ]);
     const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/llm` as string, {
       method: "POST",
@@ -30,13 +35,6 @@ export default function Chat() {
       },
       body: JSON.stringify([...messages, { role: "user", content: message }]),
     });
-    console.log(response)
-    // setMessages((messages) => {
-    //   return [
-    //     ...messages,
-    //     { role: "assistant", content: JSON.stringify("") },
-    //   ];
-    // })
     if(!response.body) return;
     const reader = response.body?.getReader();
     const decoder = new TextDecoder();
@@ -53,7 +51,7 @@ export default function Chat() {
           ...otherMessages,
           {
             ...lastMessage,
-            content: lastMessage.content + text,
+            content: lastMessage.content === "Searching..." ? "" : lastMessage.content + text,
           },
         ];
       });
@@ -67,7 +65,7 @@ export default function Chat() {
           bccs club | 🤖 chat
         </h1>
       </Link>
-      <div className="h-4/6 rounded overflow-auto">
+      <div ref={messageRef} className="h-4/6 rounded overflow-auto">
         <div className="px-5  py-4 flex-col mt-4 flex gap-3">
           {messages.map((message, i) => (
             <div key={i} className={`flex items-center gap-4 ${message.role === "user" ? "justify-end" : ""}`}>
