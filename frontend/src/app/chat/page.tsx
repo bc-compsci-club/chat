@@ -12,9 +12,7 @@ export type MessageData = {
 export default function Chat() {
   const [message, setMessage] = React.useState("");
   const messageRef = React.useRef<HTMLDivElement>(null);
-  const [messages, setMessages] = React.useState<MessageData[]>([
-    { role: "assistant", content: "Hello, how can I help you?" },
-  ]);
+  const [messages, setMessages] = React.useState<MessageData[]>([]);
 
   React.useEffect(() => {
     if (messageRef.current) {
@@ -28,7 +26,7 @@ export default function Chat() {
     setMessages((messages) => [
       ...messages,
       { role: "user", content: message },
-      { role: "assistant", content: "" },
+      { role: "assistant", content: "Searching..." },
     ]);
     const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/llm` as string, {
       method: "POST",
@@ -53,7 +51,7 @@ export default function Chat() {
           ...otherMessages,
           {
             ...lastMessage,
-            content: lastMessage.content + text,
+            content: lastMessage.content === "Searching..." ? "" : lastMessage.content + text,
           },
         ];
       });
