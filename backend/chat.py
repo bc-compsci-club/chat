@@ -55,23 +55,22 @@ class Chat:
         for chunk in self.llm.stream(formatted):
             yield chunk.content
         return chunk.content
+    
     def _prepareDocument(self, file_path: str):
         if not os.path.exists(file_path):
             raise "File does not exist"
-    
-        loader = CSVLoader(file_path.replace(".json", ".csv"), csv_args={"delimiter": ",", "quotechar": '"', 'fieldnames': self._getDocumentHeaders(file_path)})
+        headers = self._getDocumentHeaders(file_path)
+        loader = CSVLoader(file_path.replace(".json", ".csv"), csv_args={"delimiter": ",", "quotechar": '"', 'fieldnames': headers})
         docs = loader.load()[1:]
         splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
         splitted_docs = splitter.split_documents(docs)
-        result = []
-        header = self._getDocumentHeaders(file_path)[0]
-
         for doc in splitted_docs:
-            metadata = self.parse_document(doc.page_content)
-            result.append(Document(doc.page_content, metadata=metadata, id=f"{metadata[header]}"))
+            doc.metadata = self.parse_document(doc.page_content)
+            doc.page_content = doc.page_content.replace("\u0000", "")
+            doc.page_content = doc.page_content.encode("utf-8", "replace").decode("utf-8")
+        print(splitted_docs)
+        return splitted_docs
               
-        self.documents[file_path] = result
-        result = []
 
     def parse_document(self, document: str):
         lines = document.split("\n")
