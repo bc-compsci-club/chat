@@ -11,9 +11,16 @@ export type MessageData = {
 
 export default function Chat() {
   const [message, setMessage] = React.useState("");
+  const messageRef = React.useRef<HTMLDivElement>(null);
   const [messages, setMessages] = React.useState<MessageData[]>([
     { role: "assistant", content: "Hello, how can I help you?" },
   ]);
+
+  React.useEffect(() => {
+    if (messageRef.current) {
+      messageRef.current.scrollTop = messageRef.current.scrollHeight;
+    }
+  }, [messages]);
 
   async function handleForm(e: React.FormEvent) {
     e.preventDefault()
@@ -30,13 +37,6 @@ export default function Chat() {
       },
       body: JSON.stringify([...messages, { role: "user", content: message }]),
     });
-    console.log(response)
-    // setMessages((messages) => {
-    //   return [
-    //     ...messages,
-    //     { role: "assistant", content: JSON.stringify("") },
-    //   ];
-    // })
     if(!response.body) return;
     const reader = response.body?.getReader();
     const decoder = new TextDecoder();
@@ -67,7 +67,7 @@ export default function Chat() {
           bccs club | 🤖 chat
         </h1>
       </Link>
-      <div className="h-4/6 rounded overflow-auto">
+      <div ref={messageRef} className="h-4/6 rounded overflow-auto">
         <div className="px-5  py-4 flex-col mt-4 flex gap-3">
           {messages.map((message, i) => (
             <div key={i} className={`flex items-center gap-4 ${message.role === "user" ? "justify-end" : ""}`}>
