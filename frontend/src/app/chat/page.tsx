@@ -61,14 +61,15 @@ export default function Chat() {
     console.timeEnd("fetch");
   }
   return (
-    <div className="relative isolate px-5 lg:px-24 py-2 h-screen overflow-hidden bg-gradient-to-b from-bc-red/15">
+    <div className="relative isolate px-5 lg:px-24 py-2 h-full bg-gradient-to-b from-bc-red/15">
       <Link href={"/"} className="py-4 px-2 w-fit  flex gap-2 items-center">
         <h1 className="text-balance text-xl text-center font-semibold">
           bccs club | 🤖 chat
         </h1>
       </Link>
-      <div ref={messageRef} className="h-4/6 rounded overflow-auto">
-        <div className="px-5  py-4 flex-col mt-4 flex gap-3">
+      <div className={`${messages.length === 0 ? "flex items-center justify-center h-1/2 mt-10 font-bold text-2xl" : "hidden"}`}>What can I help you with?</div>
+      <div ref={messageRef} className={`h-4/5 rounded overflow-auto  ${messages.length > 0 ? "block" : "hidden"}`}>
+        <div className="px-5 py-4 flex-col mt-4 flex gap-3">
           {messages.map((message, i) => (
             <div key={i} className={`flex items-center gap-4 ${message.role === "user" ? "justify-end" : ""}`}>
               <div className={`rounded-full px-4 bg-black w-8 h-8 ${message.role === "user" && "order-2"} `}/>
@@ -77,7 +78,7 @@ export default function Chat() {
           ))}
         </div>
       </div>
-      <form onSubmit={handleForm}>
+      <form  onSubmit={handleForm}>
       <input
         required
         onChange={e => setMessage(e.target.value)}

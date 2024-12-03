@@ -1,3 +1,4 @@
+from os import getenv
 from flask import Flask, request, jsonify
 from dotenv import load_dotenv
 from flask_cors import cross_origin, CORS
@@ -6,10 +7,10 @@ from chat import Chat
 load_dotenv()
 app = Flask(__name__)
 chat = Chat()
-CORS(app)
+cors = CORS(app, origins=getenv("FRONTEND_URL"))
 
 @app.route("/api/v1/llm", methods=["POST"])
-@cross_origin(supports_credentials=True, origins="http://localhost:3000")
+@cross_origin(supports_credentials=True)
 def hello_world():
     content = (request.json[-1]["content"])
     def generate():
@@ -18,6 +19,7 @@ def hello_world():
     return generate()
 
 if __name__ == "__main__":
+    chat.initalize()
     app.run(debug=True)
 
 

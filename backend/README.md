@@ -47,6 +47,7 @@ OPENROUTER_API_KEY=key
 PINECONE_API_KEY=key
 PINECONE_INDEX_NAME=key
 TOKENIZERS_PARALLELISM=True # for huggingface embedding model
+FRONTEND_URL= # URL that you use for frontend development or production
 ```
 
 ### License
