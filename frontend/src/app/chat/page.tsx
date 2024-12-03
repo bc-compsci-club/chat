@@ -11,14 +11,14 @@ export type MessageData = {
 
 export default function Chat() {
   const [message, setMessage] = React.useState("");
-  const messageRef = React.useRef<HTMLDivElement>(null);
   const [messages, setMessages] = React.useState<MessageData[]>([]);
 
-  React.useEffect(() => {
-    if (messageRef.current) {
-      messageRef.current.scrollTop = messageRef.current.scrollHeight;
+  
+  function isScrolledToBottom(element: HTMLDivElement | null) {
+    if(element) {
+      element.scroll({ top: element.scrollHeight, behavior: "smooth" });
     }
-  }, [messages]);
+  }
 
   async function handleForm(e: React.FormEvent) {
     e.preventDefault()
@@ -68,11 +68,11 @@ export default function Chat() {
         </h1>
       </Link>
       <div className={`${messages.length === 0 ? "flex items-center justify-center h-1/2 mt-10 font-bold text-2xl" : "hidden"}`}>What can I help you with?</div>
-      <div ref={messageRef} className={`h-4/5 rounded overflow-auto  ${messages.length > 0 ? "block" : "hidden"}`}>
+      <div ref={isScrolledToBottom} className={`h-4/5 rounded overflow-auto  ${messages.length > 0 ? "block" : "hidden"}`}>
         <div className="px-5 py-4 flex-col mt-4 flex gap-3">
           {messages.map((message, i) => (
             <div key={i} className={`flex items-center gap-4 ${message.role === "user" ? "justify-end" : ""}`}>
-              <div className={`rounded-full px-4 bg-black w-8 h-8 ${message.role === "user" && "order-2"} `}/>
+              <div className={`rounded-full px-4 bg-red-200 w-8 h-8 ${message.role === "user" && "order-2"} `}/>
               <p className="bg-bc-red/15 rounded-lg p-2">{message.content}</p>
             </div>
           ))}
