@@ -8,6 +8,20 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      keyframes: {
+        typing: {
+          "0%": {
+            width: "0%",
+            visibility: "hidden"
+          },
+          // "100%": {
+          //   width: "100%",
+          // },
+        },
+      },
+      animation: {
+        typing: "typing 2s",
+      },
       colors: {
         "bc-red": "#882346",
         "bc-yellow": "#f3bd48",
