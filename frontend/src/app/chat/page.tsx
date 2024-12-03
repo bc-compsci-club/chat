@@ -7,8 +7,6 @@ export type MessageData = {
   content: string;
 };
 
-
-
 export default function Chat() {
   const [message, setMessage] = React.useState("");
   const [messages, setMessages] = React.useState<MessageData[]>([]);
@@ -29,7 +27,7 @@ export default function Chat() {
       { role: "assistant", content: "Thinking..." },
     ]);
     console.time("fetch");
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/llm` as string, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/llm`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -62,12 +60,11 @@ export default function Chat() {
   }
   return (
     <div className="relative isolate px-5 lg:px-24 py-2 h-full bg-gradient-to-b from-bc-red/15">
-      <Link href={"/"} className="py-4 px-2 w-fit  flex gap-2 items-center">
+      <Link href={"/"} className="py-4 px-2 w-fit flex gap-2 items-center">
         <h1 className="text-balance text-xl text-center font-semibold">
           bccs club | 🤖 chat
         </h1>
       </Link>
-      <div className={`${messages.length === 0 ? "flex items-center justify-center h-1/2 mt-10 font-bold text-2xl" : "hidden"}`}>What can I help you with?</div>
       <div ref={isScrolledToBottom} className={`h-4/5 rounded overflow-auto  ${messages.length > 0 ? "block" : "hidden"}`}>
         <div className="px-5 py-4 flex-col mt-4 flex gap-3">
           {messages.map((message, i) => (
@@ -78,16 +75,20 @@ export default function Chat() {
           ))}
         </div>
       </div>
-      <form  onSubmit={handleForm}>
-      <input
-        required
+      <div className={messages.length === 0 ? "h-5/6 w-full flex items-center gap-2 flex-col justify-center" : "block"}> 
+      <div className={`${messages.length === 0 ? "w-full animate-typing overflow-hidden whitespace-nowrap flex items-center justify-center font-bold text-2xl" : "hidden"}`}>What can I help you with?</div>
+      <form className="w-full" onSubmit={handleForm}>
+      <input 
         onChange={e => setMessage(e.target.value)}
-        className="mt-3 bg-bc-red/10 w-full h-12 rounded-xl px-5"
-        placeholder="Messages"
+        required
+        onInvalid={(e) => e.preventDefault()}
+        className="mt-3 bg-bc-red/10 w-full h-12 rounded-xl px-5 focus:outline-none"
+        placeholder="Enter your message..."
         value={message}
         type="text"
       />
       </form>
+      </div>
     </div>
   );
 }
