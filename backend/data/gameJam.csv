@@ -4,11 +4,11 @@ The Game Jam is a week long beginner-friendly competition between developers on 
 
 # Event Schedule
 date,event,time,room,description
-January 16th,Commencement Meeting,11AM-12PM,TBD,*Attending in-person highly encouraged
-January 16th,Team Collaboration + Github Workshop,12PM-1PM,"CSI Location 1N-111 Virtual, and BC TBD",*Ideal for beginners!
-January 16th,Game Jam Begins,2PM,Hybrid,N/A
-January 23th,"Game Jam Ends, Judging Begins",2PM-5PM,Hybrid,*Present in-person or submit a video
-January 24th,Last Day of Judging,2PM-5PM,Hybrid,N/A
+January 16th,Commencement Meeting,11AM-12PM,TBD,"This in-person meeting is highly encouraged for all participants, as it will provide essential information about the event, including the theme announcement, rules, and guidelines. It's also an excellent opportunity to meet fellow developers, form teams, and ask any questions you might have before the competition begins."
+January 16th,Team Collaboration + Github Workshop,12PM-1PM,"CSI Location 1N-111 Virtual, and BC TBD","This workshop, scheduled from 12:00 PM to 1:00 PM, is designed to help participants enhance their collaborative development skills using GitHub. Attendees will learn how to effectively manage version control, collaborate with teammates, resolve merge conflicts, and follow best practices for team projects. It's ideal for both beginners and those looking to refine their skills before diving into the Game Jam."
+January 16th,Game Jam Begins,2PM,Hybrid,"he Game Jam officially kicks off at 2:00 PM, marking the start of an exciting event! Participants will work in teams or solo to create innovative games based on the announced theme. This is your opportunity to showcase creativity, technical skills, and teamwork. Make sure to manage your time effectively and have fun while bringing your game ideas to life"
+January 23th,"Game Jam Ends, Judging Begins",2PM-5PM,Hybrid,"The Game Jam will conclude at 2:00 PM on January 23rd. Once the clock hits zero, judging will begin! All games will be reviewed by a panel of experts based on creativity, gameplay, design, and adherence to the theme. It's time to showcase your hard work and see how your game measures up. Get ready for an exciting reveal of the winners!"
+January 24th,Last Day of Judging,2PM-5PM,Hybrid,"The final day of judging will take place on January 24th. The panel will finish evaluating all the games based on creativity, technical execution, and overall gameplay experience. Participants can expect to hear the results and see the winning games announced shortly afterward. It's the last chance to see how your hard work is assessed, and the excitement is building up for the grand reveal!"
 
 # Judges
 name,title,employer
@@ -38,3 +38,4 @@ question_number,question,answer
 6,Will be there food at Game Jam 2025?,"Yes, there will be food at Game Jam 2025."
 7,Do I need to have experience to participate in Game Jam 2025?,"No, you do not need to have experience to participate in Game Jam 2025. The competition is beginner-friendly."
 8,What is the team limit for Game Jam 2025? Can I participate alone?,"The team limit for Game Jam 2025 is 4. You can participate alone or with a team."
+
